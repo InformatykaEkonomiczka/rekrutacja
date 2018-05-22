@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return render_template("index1.html")
+def index():
+    return render_template("index1.html",a="dupa")
 
 @app.route('/admin',methods=["GET"])
 def admin():
