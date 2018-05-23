@@ -52,10 +52,7 @@ class ExamGenerator:
                 "it": self.it
             }
         return results
-
-    def get_name(self):
-        return self.name
-
+        
     def __str__(self):
         return "Maths: " + str(self.maths) + \
                " Physics: " + str(self.physics) + \

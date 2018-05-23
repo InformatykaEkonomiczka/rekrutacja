@@ -1,6 +1,7 @@
 import datetime
 import exam_generator
 
+
 class Student:
     def __init__(self, name, surname, pesel):
         self.name = surname + " " + name
@@ -39,12 +40,13 @@ class Student:
     def get_name(self):
         return self.name
 
+    def get_pesel(self):
+        return self.pesel
+
     def get_exam_results(self):
         return self.exam_results
 
     def __str__(self):
         return "Student: " + self.name + ", age: " + str(self.age) + ", sex: " + self.sex + "\n" + \
-                "Exam results: " + str(self.exam_results) + \
-                ("\nEXAMS FAILED!" if not self.exam_results.get_pass_result() else "")
-
-
+            "Exam results: " + str(self.exam_results) + \
+            ("\nEXAMS FAILED!" if not self.exam_results.get_pass_result() else "")
