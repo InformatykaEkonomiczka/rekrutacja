@@ -1,11 +1,19 @@
-from flask import Flask, render_template, send_from_directory, request
+from flask import Flask, render_template, send_from_directory
+
+import db_getter
 
 app = Flask(__name__)
+app.debug = True
+
+
+#******************************
+field="KIERUNEK STUDIÓW"
+#******************************
 
 
 @app.route('/')
 def index():
-    return render_template("index1.html",a="dupa")
+    return render_template("index1.html")
 
 @app.route('/admin',methods=["GET"])
 def admin():
@@ -17,7 +25,10 @@ def kontakt():
 
 @app.route('/lista',methods=["GET"])
 def lista():
-    return render_template("lista1.html")
+    return render_template("lista1.html",
+                            field=field,
+                            students=db_getter.get_students(field),
+                            students_reserve=db_getter.get_students_reserve(field))
 
 @app.route('/login',methods=["GET"])
 def login():
