@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 
 app = Flask(__name__)
 
@@ -22,6 +22,13 @@ def lista():
 @app.route('/login',methods=["GET"])
 def login():
     return render_template("login1.html")
+
+@app.route('/login_post',methods=["POST"])
+def login_post():
+    login = request.form["login"]
+    haslo = request.form["haslo"]
+    print("Zalogowal sie: " + login + " haslo: " + haslo)
+    return render_template("index1.html")
 
 @app.route('/rejestracja',methods=["GET"])
 def rejestracja():
