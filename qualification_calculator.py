@@ -12,12 +12,12 @@ class QualificationCalculator:
 
         results = self.exam_results.get_results()
 
-        if self.field_of_study == "management":
+        if self.field_of_study == "Zarzadzanie":
             return 4*results["english"] + results["polish"]
-        elif self.field_of_study == "computer_science":
+        elif self.field_of_study == "Informatyka Stosowana":
             science_better = max(results["physics"], results["it"])
             return 4*results["maths"] + science_better
-        elif self.field_of_study == "economics":
+        elif self.field_of_study == "Ekonomia":
             best_subjects = sorted(results.items(), key=lambda x: x[1], reverse=True)
             return 4*best_subjects[0][1] + best_subjects[1][1]
 

@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Rejestracja</title>
     <link rel="stylesheet" href="styles/layout.css" type="text/css">
     <link rel="stylesheet" href="styles/form.css" type="text/css">
 </head>
+
 <body>
     <div class="wrapper row1">
         <header id="header">
             <div id="hgroup">
-                <h1><a href="/">Wyższa Szkoła Gotowania na gazie</a></h1>
+                <h1>
+                    <a href="/">Wyższa Szkoła Gotowania na gazie</a>
+                </h1>
                 <h2>W Pcimiu Dolnym</h2>
             </div>
             <nav>
                 <ul>
-                    <li><a href="/login">Logowanie</a></li>
-                    <li><a href="/lista">Lista przyjętych</a></li>
-                    <li class="last"><a href="/kontakt">Kontakt</a></li>
+                    <li>
+                        <a href="/login">Logowanie</a>
+                    </li>
+                    <li>
+                        <a href="/lista">Lista przyjętych</a>
+                    </li>
+                    <li class="last">
+                        <a href="/kontakt">Kontakt</a>
+                    </li>
                 </ul>
             </nav>
             <div class="clear"></div>
@@ -27,33 +37,56 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-                <form>
+                <form action="/rejestracja_post" method="POST">
                     <div class="divdescription">
                         Dane osobowe:
                     </div>
                     <label>
-                        Login:
-                        <input type="text" />
+                        Pesel (login):
+                        <input name="pesel" type="text" />
                     </label>
                     <label>
                         Hasło:
-                        <input type="password" />
+                        <input name="password" type="password" />
                     </label>
                     <label>
                         Imię:
-                        <input type="text" />
+                        <input name="name" type="text" />
                     </label>
                     <label>
                         Nazwisko:
-                        <input type="text" />
+                        <input name="surname" type="text" />
                     </label>
                     <label>
                         Email:
-                        <input type="text" />
+                        <input name="email" type="text" />
+                    </label>
+                    <div class="divdescription">
+                        Wybór kierunków (można zostawić puste):
+                    </div>
+                    <label>
+                        Kierunek 1:
+                        <select name="field1">
+                            {% for field in fields %}
+                            <option value="{{ field }}">{{ field }}</option>
+                            {% endfor %}
+                        </select>
                     </label>
                     <label>
-                        Pesel:
-                        <input type="text" />
+                        Kierunek 2:
+                        <select name="field2">
+                            {% for field in fields %}
+                            <option value="{{ field }}">{{ field }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label>
+                        Kierunek 3:
+                        <select name="field3">
+                            {% for field in fields %}
+                            <option value="{{ field }}">{{ field }}</option>
+                            {% endfor %}
+                        </select>
                     </label>
                     <input type="submit" />
                 </form>
@@ -65,9 +98,12 @@
     <!-- footer -->
     <div class="wrapper row3">
         <footer id="footer">
-            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">WSGNG</a></p>
+            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved -
+                <a href="#">WSGNG</a>
+            </p>
             <div class="clear"></div>
         </footer>
     </div>
 </body>
+
 </html>

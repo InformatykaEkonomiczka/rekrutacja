@@ -4,7 +4,8 @@ import exam_generator
 
 class Student:
     def __init__(self, name, surname, pesel):
-        self.name = surname + " " + name
+        self.surname = surname
+        self.name = name
         self.pesel = str(pesel)
         self.birthdate = self.__calculate_birthdate()
         self.age = self.__calculate_age()
@@ -39,6 +40,9 @@ class Student:
 
     def get_name(self):
         return self.name
+
+    def get_surname(self):
+        return self.surname
 
     def get_pesel(self):
         return self.pesel
