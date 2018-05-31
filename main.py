@@ -68,7 +68,7 @@ def login_post():
     #print("Zalogowal sie: " + login + " haslo: " + haslo)
     global loggedin
     loggedin = True
-    return render_template("login1.html", loggedin=loggedin)
+    return render_template("loggedin.html", loggedin=loggedin)
 
 @app.route('/logout',methods=["GET"])
 def logout():
@@ -127,6 +127,10 @@ def rejestracja_post():
 @app.route('/rekrutacja',methods=["GET"])
 def rekrutacja():
     return render_template("rekrutacja1.html", loggedin=loggedin)
+
+@app.route('/aktualnosci',methods=["GET"])
+def aktualnosci():
+    return render_template("aktualnosci.html", loggedin=loggedin)
 
 @app.route('/styles/<path:path>')
 def send_js(path):
