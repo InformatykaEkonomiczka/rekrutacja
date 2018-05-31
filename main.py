@@ -39,8 +39,8 @@ def kontakt():
     print(loggedin)
     return render_template("kontakt1.html", loggedin=loggedin)
 
-@app.route('/lista',methods=["GET"])
-def lista():
+@app.route('/lista/<field>',methods=["GET"])
+def lista(field):
     cur = mysql.connection.cursor()
     cur.execute('''SELECT nazwa FROM kierunek''')
     rv = cur.fetchall()
@@ -50,10 +50,12 @@ def lista():
     # 2 - Ekonomia
     # 3 - Informatyka stosowana
     # default: rv(field=1)
-    field = 1
+    #field = 1
 
     return render_template("lista1.html",
-                            field=rv[field][0],
+                            ind = field,
+                            field=rv[int(field)][0],
+                            rv = rv,
                             students=db_getter.get_students(field),
                             students_reserve=db_getter.get_students_reserve(field))
 
@@ -134,6 +136,10 @@ def aktualnosci():
 
 @app.route('/styles/<path:path>')
 def send_js(path):
+    return send_from_directory('styles', path)
+
+@app.route('/lista/styles/<path:path>')
+def send_js1(path):
     return send_from_directory('styles', path)
 
 if __name__ == '__main__':

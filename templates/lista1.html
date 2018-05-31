@@ -3,7 +3,8 @@
 
 <head>
     <title>Lista przyjętych</title>
-    <link rel="stylesheet" href="styles/layout.css" type="text/css">
+    <link rel="stylesheet" href="./styles/layout.css" type="text/css">
+    <link rel="stylesheet" href="./styles/form.css" type="text/css">
 </head>
 
 <body>
@@ -30,7 +31,7 @@
                         <a href="/rekrutacja">Twój wynik</a>
                     </li>
                     <li>
-                        <a href="/lista">Listy przyjętych</a>
+                        <a href="/lista/1">Listy przyjętych</a>
                     </li>
                     <li>
                         <a href="/edycja">Edycja danych</a>
@@ -48,9 +49,10 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-                <select>
-  <option value="k1">k1</option>
-  <option value="k2">k2</option>
+                <select class="selectBox" id="fieldSelect">
+              {% for row in rv %}  
+  <option value="{{rv.index(row)}}">{{row[0]}}</option>
+  {% endfor %}
 </select>
                 <button onclick="wybierz()">Wybierz</button>
 
@@ -83,6 +85,16 @@
             <div class="clear"></div>
         </footer>
     </div>
+
+    <script>
+    document.getElementById("fieldSelect").value = {{ ind }};
+
+    function wybierz() {
+       var field = document.getElementById("fieldSelect").value;
+
+       location.href = "/lista/" + field;
+    }
+    </script>
 </body>
 
 </html>

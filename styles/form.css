@@ -52,3 +52,13 @@ label {
         border:1px solid #AAAAAA;
         color: #979797;
 }
+
+button {
+    padding: 5px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    margin-left: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
