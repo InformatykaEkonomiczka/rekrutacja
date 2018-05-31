@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Loggedin</title>
+    <title>Strona główna</title>
     <link rel="stylesheet" href="styles/layout.css" type="text/css">
 </head>
 
@@ -57,7 +57,12 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-                tutaj loggedin...
+                {% for field in fields %}
+                <h2>{{ field[0] }}</h2>
+                <p>Liczba miejsc: {{ field[1] }}</p>
+                <p>Prog punktowy: {{ field[2] }}</p>
+                <p>Wskaźnik rekrutacyjny: {{ field[3] }}</p>
+                {% endfor %}
             </div>
             <!-- / content body -->
             <div class="clear"></div>

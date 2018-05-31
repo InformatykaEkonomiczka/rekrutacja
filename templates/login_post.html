@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Aktualności</title>
+    <title>Strona główna</title>
     <link rel="stylesheet" href="styles/layout.css" type="text/css">
 </head>
 
@@ -31,7 +31,7 @@
                         <a href="/rekrutacja">Twój wynik</a>
                     </li>
                     <li>
-                        <a href="/lista/0">Listy przyjętych</a>
+                        <a href="/lista/1">Listy przyjętych</a>
                     </li>
                     <li>
                         <a href="/edycja">Edycja danych</a>
@@ -57,10 +57,26 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-                {% for info in news %}
-                <h3>{{ info[0] }}</h3>
-                <p>{{ info[1] }}</p>
-                {% endfor %}
+                <form action="/login_post" method="POST">
+                    <div>
+                        Login:
+                    </div>
+                    <div>
+                        <input name="login" type="text" />
+                    </div>
+                    <div>
+                        Hasło:
+                    </div>
+                    <div>
+                        <input name="haslo" type="text" />
+                    </div>
+                    <div>
+                        <input type="submit" />
+                    </div>
+                    <div>
+                        <a href="/rejestracja">Utwórz nowe konto</a>
+                    </div>
+                </form>
             </div>
             <!-- / content body -->
             <div class="clear"></div>

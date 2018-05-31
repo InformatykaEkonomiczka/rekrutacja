@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lista przyjętych</title>
+    <link rel="stylesheet" href="./styles/layout.css" type="text/css">
+    <link rel="stylesheet" href="./styles/form.css" type="text/css">
+</head>
+
+<body>
+    <div class="wrapper row1">
+        <header id="header">
+            <div id="hgroup">
+                <h1>
+                    <a href="/">Wyższa Szkoła Gotowania na gazie</a>
+                </h1>
+                <h2>W Pcimiu Dolnym</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/">Strona główna</a>
+                    </li>
+                    <li>
+                        <a href="/aktualnosci">Aktualności</a>
+                    </li>
+                    <li>
+                        <a href="/kryteria">Kryteria rekrutacji</a>
+                    </li>
+                    {% if loggedin %}
+                    <li>
+                        <a href="/rekrutacja">Twój wynik</a>
+                    </li>
+                    <li>
+                        <a href="/lista/1">Listy przyjętych</a>
+                    </li>
+                    <li>
+                        <a href="/edycja">Edycja danych</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Wyloguj</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="/login">Logowanie</a>
+                    </li>
+                    {% endif %}
+                    <li class="last">
+                        <a href="/kontakt">Kontakt</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="clear"></div>
+        </header>
+    </div>
+    <!-- content -->
+    <div class="wrapper row2">
+        <div id="container">
+            <!-- content body -->
+            <div id="content" class="contentdiv">
+                <p>
+                    <b>Pamiętaj, że możesz znaleźć się na wielu listach. Ostateczną decyzję musisz podjąć przed rozpoczęciem
+                        semestru!
+                    </b>
+                </p>
+
+                <select class="selectBox" id="fieldSelect">
+                    {% for row in all_fields %}
+                    <option value="{{all_fields.index(row)}}">{{row[0]}}</option>
+                    {% endfor %}
+                </select>
+                <button onclick="wybierz()">Wybierz</button>
+
+                <div id='listdiv'>
+                    {% if qualified_students %}
+                    <h4>Lista przyjętych na kierunek {{ field_data["name"] }}: </h4>
+                    <ol>
+                        {% for student in qualified_students %}
+                        <li>
+                            <span>{{ student[0] }}</span>
+                            <span style="margin-left: 10px">{{ student[1] }}</span>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                    {% else %}
+                    <p>Nie zarejestrowano jeszcze żadnych zgłoszeń na kierunek! Bądź pierwszy!</p>
+                    {% endif %} {% if reserved_students %}
+                    <h4>Lista rezerwowa na kierunek {{ field_data["name"] }}: </h4>
+                    <ol>
+                        {% for student in reserved_students %}
+                        <li>
+                            <span>{{ student[0] }}</span>
+                            <span style="margin-left: 10px">{{ student[1] }}</span>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                    {% endif %}
+                </div>
+                <p>Minimalna liczba punktów uprawniająca do zakwalifikowania się: {{ field_data["threshold"] }}</p>
+                <p>Maksymalna liczba przyjętych osób: {{ field_data["limit"] }}</p>
+            </div>
+            <!-- / content body -->
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="wrapper row3">
+        <footer id="footer">
+            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved -
+                <a href="#">WSGNG</a>
+            </p>
+            <div class="clear"></div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("fieldSelect").value = {{ ind }};
+
+        function wybierz() {
+            var field = document.getElementById("fieldSelect").value;
+
+            location.href = "/lista/" + field;
+        }
+    </script>
+</body>
+
+</html>
