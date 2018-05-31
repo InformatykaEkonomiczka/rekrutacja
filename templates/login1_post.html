@@ -23,7 +23,6 @@
                     <li>
                         <a href="/kryteria">Kryteria rekrutacji</a>
                     </li>
-                    {% if loggedin %}
                     <li>
                         <a href="/rekrutacja">Twój wynik</a>
                     </li>
@@ -33,14 +32,6 @@
                     <li>
                         <a href="/edycja">Edycja danych</a>
                     </li>
-                    <li>
-                        <a href="/logout">Wyloguj</a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="/login">Logowanie</a>
-                    </li>
-                    {% endif %}
                     <li class="last">
                         <a href="/kontakt">Kontakt</a>
                     </li>
@@ -54,7 +45,6 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-                {% if not loggedin %}
                 <form action="/login_post" method="POST">
                     <div>
                         Login:
@@ -75,9 +65,6 @@
                         <a href="/rejestracja">Utwórz nowe konto</a>
                     </div>
                 </form>
-                {% else %}
-                <p>Zalogowano jako AAAA</p>
-                {% endif %}
             </div>
             <!-- / content body -->
             <div class="clear"></div>

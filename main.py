@@ -17,21 +17,27 @@ app.config['MYSQL_PASSWORD'] = 'baza_projekt1'
 app.config['MYSQL_DB'] = 'baza_projekt'
 mysql = MySQL(app)
 
+# GLOBAL??
+loggedin = False
+
 @app.route('/', methods=["GET"])
 def index():
     cur = mysql.connection.cursor()
     cur.execute('''SELECT * FROM aktualnosci''')
+    rv = cur.fetchall() 
+    return render_template("index1.html", news=reversed(rv), loggedin=loggedin)
+    
+@app.route('/kryteria', methods=["GET"])
+def kryteria():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT * FROM kryteria_rekrutacji''')
     rv = cur.fetchall()
-        
-    return render_template("index1.html", news=reversed(rv))
-
-@app.route('/admin',methods=["GET"])
-def admin():
-    return render_template("admin1.html")
+    return render_template("kryteria1.html", fields=rv, loggedin=loggedin)
 
 @app.route('/kontakt',methods=["GET"])
 def kontakt():
-    return render_template("kontakt1.html")
+    print(loggedin)
+    return render_template("kontakt1.html", loggedin=loggedin)
 
 @app.route('/lista',methods=["GET"])
 def lista():
@@ -53,14 +59,22 @@ def lista():
 
 @app.route('/login',methods=["GET"])
 def login():
-    return render_template("login1.html")
+    return render_template("login1.html", loggedin=loggedin)
 
 @app.route('/login_post',methods=["POST"])
 def login_post():
     login = request.form["login"]
     haslo = request.form["haslo"]
-    print("Zalogowal sie: " + login + " haslo: " + haslo)
-    return render_template("index1.html")
+    #print("Zalogowal sie: " + login + " haslo: " + haslo)
+    global loggedin
+    loggedin = True
+    return render_template("login1.html", loggedin=loggedin)
+
+@app.route('/logout',methods=["GET"])
+def logout():
+    global loggedin
+    loggedin = False
+    return render_template("login1.html", loggedin=loggedin)
 
 @app.route('/rejestracja',methods=["GET"])
 def rejestracja():
@@ -108,11 +122,11 @@ def rejestracja_post():
     else:
         print("JUZ JEST")
     
-    return render_template("login1.html")
+    return render_template("login1.html", loggedin=loggedin)
 
 @app.route('/rekrutacja',methods=["GET"])
 def rekrutacja():
-    return render_template("rekrutacja1.html")
+    return render_template("rekrutacja1.html", loggedin=loggedin)
 
 @app.route('/styles/<path:path>')
 def send_js(path):

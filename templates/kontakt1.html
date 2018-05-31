@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Kontakt</title>
     <link rel="stylesheet" href="styles/layout.css" type="text/css">
 </head>
+
 <body>
     <div class="wrapper row1">
         <header id="header">
             <div id="hgroup">
-                <h1><a href="/">Wyższa Szkoła Gotowania na gazie</a></h1>
+                <h1>
+                    <a href="/">Wyższa Szkoła Gotowania na gazie</a>
+                </h1>
                 <h2>W Pcimiu Dolnym</h2>
             </div>
             <nav>
                 <ul>
-                    <li><a href="/rekrutacja">Rekrutacja</a></li>
-                    <li><a href="/lista">Lista przyjętych</a></li>
-                    <li><a href="/admin">Panel administratora</a></li>
-                    <li class="last"><a href="/kontakt">Kontakt</a></li>
+                    <li>
+                        <a href="/">Aktualności</a>
+                    </li>
+                    <li>
+                        <a href="/kryteria">Kryteria rekrutacji</a>
+                    </li>
+                    {% if loggedin %}
+                    <li>
+                        <a href="/rekrutacja">Twój wynik</a>
+                    </li>
+                    <li>
+                        <a href="/lista">Listy przyjętych</a>
+                    </li>
+                    <li>
+                        <a href="/edycja">Edycja danych</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Wyloguj</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="/login">Logowanie</a>
+                    </li>
+                    {% endif %}
+                    <li class="last">
+                        <a href="/kontakt">Kontakt</a>
+                    </li>
                 </ul>
             </nav>
             <div class="clear"></div>
@@ -27,9 +54,14 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-
                 <div>
-                   Telefon: 45245242542
+                    <h3>Wyższa Szkoła Gotowania na Gazie</h3>
+                    <p>ul. Gier i Zabaw 69
+                        <br>69-66 Pcim Dolny
+                        <br> tel. 666-000-666
+                        <br>
+                        <a href="mailto:wsgng@pcim.pl">wsgng@pcim.pl</a>
+                    </p>
                 </div>
             </div>
             <!-- / content body -->
@@ -39,9 +71,12 @@
     <!-- footer -->
     <div class="wrapper row3">
         <footer id="footer">
-            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">WSGNG</a></p>
+            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved -
+                <a href="#">WSGNG</a>
+            </p>
             <div class="clear"></div>
         </footer>
     </div>
 </body>
+
 </html>
