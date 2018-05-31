@@ -1,3 +1,4 @@
+# coding=utf-8
 from flask import Flask, render_template, request, send_from_directory
 from flask_mysqldb import MySQL
 
@@ -16,9 +17,13 @@ app.config['MYSQL_PASSWORD'] = 'baza_projekt1'
 app.config['MYSQL_DB'] = 'baza_projekt'
 mysql = MySQL(app)
 
-@app.route('/')
+@app.route('/', methods=["GET"])
 def index():
-    return render_template("index1.html")
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT * FROM aktualnosci''')
+    rv = cur.fetchall()
+        
+    return render_template("index1.html", news=reversed(rv))
 
 @app.route('/admin',methods=["GET"])
 def admin():
