@@ -27,8 +27,9 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
-                {% for i in range(1,11) %}
-                <p> Tu jakiś tekst, aktualności. Tu jakiś tekst, aktualności. Tu jakiś tekst, aktualności. Tu jakiś tekst, aktualności.</p>
+                {% for info in news %}
+                <h3>{{ info[0] }}</h3>
+                <p>{{ info[1] }}</p>
                 {% endfor %}
             </div>
             <!-- / content body -->
