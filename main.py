@@ -161,6 +161,10 @@ def rekrutacja():
     return render_template("rekrutacja1.html", loggedin=loggedin, personal_data=personal_data, points=points, fields=fields)
 
 
+@app.route('/aktualnosci',methods=["GET"])
+def aktualnosci():
+    return render_template("aktualnosci.html", loggedin=loggedin)
+
 @app.route('/styles/<path:path>')
 def send_js(path):
     return send_from_directory('styles', path)

@@ -19,7 +19,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="/">Aktualności</a>
+                        <a href="/aktualnosci">Aktualności</a>
                     </li>
                     <li>
                         <a href="/kryteria">Kryteria rekrutacji</a>
@@ -40,6 +40,7 @@
                     {% else %}
                     <li>
                         <a href="/login">Logowanie</a>
+
                     </li>
                     {% endif %}
                     <li class="last">
@@ -84,7 +85,7 @@
                     </div>
                     <label>
                         Kierunek 1:
-                        <select name="field1">
+                        <select class="selectBox" name="field1">
                             {% for field in fields %}
                             <option value="{{ field }}">{{ field }}</option>
                             {% endfor %}
@@ -92,7 +93,7 @@
                     </label>
                     <label>
                         Kierunek 2:
-                        <select name="field2">
+                        <select class="selectBox" name="field2">
                             {% for field in fields %}
                             <option value="{{ field }}">{{ field }}</option>
                             {% endfor %}
@@ -100,7 +101,7 @@
                     </label>
                     <label>
                         Kierunek 3:
-                        <select name="field3">
+                        <select class="selectBox" name="field3">
                             {% for field in fields %}
                             <option value="{{ field }}">{{ field }}</option>
                             {% endfor %}

@@ -18,7 +18,10 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="/">Aktualności</a>
+                        <a href="/">Strona główna</a>
+                    </li>
+                    <li>
+                        <a href="/aktualnosci">Aktualności</a>
                     </li>
                     <li>
                         <a href="/kryteria">Kryteria rekrutacji</a>
@@ -45,6 +48,14 @@
         <div id="container">
             <!-- content body -->
             <div id="content" class="contentdiv">
+                <select>
+  <option value="k1">k1</option>
+  <option value="k2">k2</option>
+</select>
+                <button onclick="wybierz()">Wybierz</button>
+
+                <div id='listdiv'>
+
                 <h4>Lista przyjętych na kierunek {{ field }}: </h4>
                 <ol>
                     {% for student in students %}
@@ -57,6 +68,7 @@
                     <li>{{ student }} </li>
                     {% endfor %}
                 </ol>
+                </div>
             </div>
             <!-- / content body -->
             <div class="clear"></div>
