@@ -75,12 +75,16 @@ def login():
 @app.route('/login_post', methods=["POST"])
 def login_post():
     login = request.form["login"]
-    haslo = request.form["haslo"]
-    global loggedin
-    loggedin = True
-    global pesel
-    pesel = login
-    return render_template("login.html", loggedin=loggedin)
+    password = request.form["haslo"]
+    if functions.check_password(login,password, mysql.connection.cursor()):
+        global loggedin
+        loggedin = True
+        global pesel
+        pesel = login
+        personal_data = functions.get_personal_data(pesel, mysql.connection.cursor())
+        return render_template("login.html", loggedin=loggedin, personal_data=personal_data)
+    else:
+        return render_template("login.html", loggedin=False)
 
 
 @app.route('/logout', methods=["GET"])
@@ -107,7 +111,7 @@ def rejestracja_post():
         password = request.form["password"]
         name = request.form["name"]
         surname = request.form["surname"]
-        #email = request.form["email"]
+        email = request.form["email"]
 
         field1 = request.form["field1"]
         field2 = request.form["field2"]
@@ -117,7 +121,7 @@ def rejestracja_post():
 
         if x.get_exam_results().get_pass_result():
             functions.register_user(
-                x, password, field1, field2, field3, mysql.connection.cursor())
+                x, password, field1, field2, field3, email, mysql.connection.cursor())
             mysql.connection.commit()
         else:
             errormsg = "Nie zdałeś matury! Nie zostajesz dopuszczony do studiów!"
@@ -140,7 +144,21 @@ def rekrutacja():
 
 @app.route('/edycja', methods=["GET"])
 def edycja():
-    return render_template("edycja.html", loggedin=loggedin)
+    (name,surname,email,password) = functions.get_full_user_data(pesel, mysql.connection.cursor())
+    return render_template("edycja.html", loggedin=loggedin, pesel=pesel, password=password, name=name, surname=surname, email=email)
+
+
+@app.route('/edycja_post', methods=["POST"])
+def edycja_post():
+    password = request.form["password"]
+    name = request.form["name"]
+    surname = request.form["surname"]
+    email = request.form["email"]
+
+    functions.change_user_data(pesel, name, surname, email, password, mysql.connection.cursor())
+    mysql.connection.commit()
+
+    return render_template("edycja_post.html", loggedin=loggedin)
 
 @app.route('/styles/<path:path>')
 def send_js(path):

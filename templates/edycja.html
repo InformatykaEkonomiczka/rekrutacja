@@ -57,61 +57,38 @@
     <div class="wrapper row2">
         <div id="container">
             <!-- content body -->
-            <!-- <div id="content" class="contentdiv">
-                <form action="/rejestracja_post" method="POST">
+            <div id="content" class="contentdiv">
+                <form action="/edycja_post" method="POST">
                     <div class="divdescription">
                         Dane osobowe:
                     </div>
                     <label>
                         Pesel (login):
-                        <input name="pesel" type="text" />
+                        <br>Edycja numeru Pesel niemożliwa!
+                        <input name="pesel" type="text" value="{{ pesel }}" disabled />
                     </label>
                     <label>
                         Hasło:
-                        <input name="password" type="password" />
+                        <input name="password" type="password" value="{{ password }}" />
                     </label>
                     <label>
                         Imię:
-                        <input name="name" type="text" />
+                        <input name="name" type="text" value="{{ name }}" />
                     </label>
                     <label>
                         Nazwisko:
-                        <input name="surname" type="text" />
+                        <input name="surname" type="text" value="{{ surname }}" />
                     </label>
                     <label>
                         Email:
-                        <input name="email" type="text" />
+                        <input name="email" type="email" value="{{ email }}" />
                     </label>
-                    <div class="divdescription">
-                        Wybór kierunków (można zostawić puste):
-                    </div>
-                    <label>
-                        Kierunek 1:
-                        <select class="selectBox" name="field1">
-                            {% for field in fields %}
-                            <option value="{{ field }}">{{ field }}</option>
-                            {% endfor %}
-                        </select>
-                    </label>
-                    <label>
-                        Kierunek 2:
-                        <select class="selectBox" name="field2">
-                            {% for field in fields %}
-                            <option value="{{ field }}">{{ field }}</option>
-                            {% endfor %}
-                        </select>
-                    </label>
-                    <label>
-                        Kierunek 3:
-                        <select class="selectBox" name="field3">
-                            {% for field in fields %}
-                            <option value="{{ field }}">{{ field }}</option>
-                            {% endfor %}
-                        </select>
-                    </label>
+                    <p>
+                        Dokonałeś już wyboru kierunków. Nie można zmieniać swojego wyboru!
+                    </p>
                     <input type="submit" />
                 </form>
-            </div> -->
+            </div>
             <!-- / content body -->
             <div class="clear"></div>
         </div>

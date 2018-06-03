@@ -59,6 +59,11 @@
             <div id="content" class="contentdiv">
                 <p>Zalogowano jako:</p>
                 <h2>{{ personal_data[0] }} {{ personal_data[1] }}</h2>
+                {% if personal_data[2] %}
+                <p>{{ personal_data[2] }}<p>
+                {% else %}
+                <p style="color:red">Nie podano adresu email! Uzupełnij go w oknie "Edycja danych"</p>
+                {% endif %}
                 <p>Twoje wyniki matury:</p>
                 <ul>
                     <li>Matematyka: {{ points[0] }}</li>

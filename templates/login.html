@@ -61,16 +61,16 @@
                 {% if not loggedin %}
                 <form action="/login_post" method="POST">
                     <div>
-                        Login:
+                        Login (PESEL):
                     </div>
                     <div>
-                        <input name="login" type="text" />
+                        <input name="login" type="text" pattern="[0-9]{11}"/>
                     </div>
                     <div>
                         Hasło:
                     </div>
                     <div>
-                        <input name="haslo" type="text" />
+                        <input name="haslo" type="password" />
                     </div>
                     <div>
                         <input type="submit" />
@@ -80,7 +80,7 @@
                     </div>
                 </form>
                 {% else %}
-                <p>Zalogowano jako {{ errormsg }}</p>
+                <p>Zalogowano jako {{ personal_data[0] }} {{ personal_data[1] }}</p>
                 {% endif %}
             </div>
             <!-- / content body -->

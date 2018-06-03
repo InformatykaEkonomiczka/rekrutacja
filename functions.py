@@ -91,9 +91,9 @@ def check_pesel_existance(pesel, cur):
         return False
 
 
-def register_user(x, password, field1, field2, field3, cur):
-    cur.execute('''INSERT INTO `kandydat`(`pesel`, `imie`, `nazwisko`, `poziom dostepu`, `haslo`) VALUES (%s, %s, %s, %s, %s)''',
-                (x.get_pesel(), x.get_name(), x.get_surname(), 1, password))
+def register_user(x, password, field1, field2, field3, email, cur):
+    cur.execute('''INSERT INTO `kandydat`(`pesel`, `imie`, `nazwisko`, `poziom dostepu`, `haslo`, `email`) VALUES (%s, %s, %s, %s, %s, %s)''',
+                (x.get_pesel(), x.get_name(), x.get_surname(), 1, password, email))
 
     cur.execute('''INSERT INTO `matura`(`pesel`, `Matematyka`, `Fizyka`, `Informatyka`, `Polski`, `Angielski`) VALUES (%s, %s, %s, %s, %s, %s)''',
                 (x.get_pesel(), x.get_exam_results().get_results()["maths"], x.get_exam_results().get_results()["physics"],
@@ -112,9 +112,34 @@ def register_user(x, password, field1, field2, field3, cur):
 
 def get_personal_data(pesel, cur):
     cur.execute(
-        '''SELECT imie,nazwisko FROM kandydat WHERE pesel=%s''' % str(pesel))
+        '''SELECT imie,nazwisko,email FROM kandydat WHERE pesel=%s''' % str(pesel))
     personal_data = cur.fetchall()[0]
     return personal_data
+
+def check_password(pesel, password, cur):
+    cur.execute(
+        '''SELECT haslo FROM kandydat WHERE pesel=%s''' % str(pesel))
+    password_db = cur.fetchall()[0][0]
+    print(password_db)
+    return True if password == password_db else False
+
+
+def get_full_user_data(pesel, cur):
+    cur.execute(
+        '''SELECT imie,nazwisko,email,haslo FROM kandydat WHERE pesel=%s''' % str(pesel))
+    personal_data = cur.fetchall()[0]
+    return personal_data
+
+
+def change_user_data(pesel, name, surname, email, password, cur):
+    cur.execute('''UPDATE kandydat SET imie='%s' WHERE pesel=%s''' %
+                (name, str(pesel)))
+    cur.execute('''UPDATE kandydat SET nazwisko='%s' WHERE pesel=%s''' %
+                (surname, str(pesel)))
+    cur.execute('''UPDATE kandydat SET email='%s' WHERE pesel=%s''' %
+                (email, str(pesel)))
+    cur.execute('''UPDATE kandydat SET haslo='%s' WHERE pesel=%s''' %
+                (password, str(pesel)))
 
 
 def get_exam_points(pesel, cur):
